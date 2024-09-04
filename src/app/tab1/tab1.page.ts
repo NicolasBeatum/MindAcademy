@@ -16,6 +16,11 @@ export class Tab1Page implements OnInit {
   }
 
   getSubjectsByDay(day: string): Subject[] {
-    return this.subjects.filter(subject => subject.days && subject.days.some(d => d.day === day));
+    return this.subjects.filter(subject => 
+      subject.days.some(d => d.day === day)
+    ).map(subject => ({
+      ...subject,
+      days: subject.days.filter(d => d.day === day)
+    }));
   }
 }

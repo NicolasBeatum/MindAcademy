@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SubjectService, Subject } from '../services/subject.service';
 import { Router } from '@angular/router';
-import { SubjectService } from '../services/subject.service'; // Ajusta la ruta según sea necesario
-
-interface Subject {
-  name: string;
-  days: Array<{ day: string, startTime: string, endTime: string, color: string }>;
-}
 
 @Component({
   selector: 'app-add-subject',
@@ -25,22 +20,13 @@ export class AddSubjectPage implements OnInit {
     // Initialization logic here
   }
 
-  addDays() {
-    this.selectedDays.forEach(day => {
-      this.subject.days.push({
-        day: day,
-        startTime: this.startTimes[day],
-        endTime: this.endTimes[day],
-        color: this.color
-      });
-    });
-    this.selectedDays = [];
-    this.startTimes = {};
-    this.endTimes = {};
-    this.color = '';
-  }
-
   saveSubject() {
+    this.subject.days = this.selectedDays.map(day => ({
+      day: day,
+      startTime: this.startTimes[day],
+      endTime: this.endTimes[day],
+      color: this.color
+    }));
     this.subjectService.addSubject(this.subject);
     this.router.navigate(['/tabs/tab2']);
   }

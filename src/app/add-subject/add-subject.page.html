@@ -20,18 +20,19 @@
       <ion-select-option value="Viernes">Viernes</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-item *ngFor="let day of selectedDays">
-    <ion-label>{{ day }} - Hora de Inicio</ion-label>
-    <ion-datetime display-format="HH:mm" picker-format="HH:mm" presentation="time" [(ngModel)]="startTimes[day]"></ion-datetime>
-  </ion-item>
-  <ion-item *ngFor="let day of selectedDays">
-    <ion-label>{{ day }} - Hora de Finalización</ion-label>
-    <ion-datetime display-format="HH:mm" picker-format="HH:mm" presentation="time" [(ngModel)]="endTimes[day]"></ion-datetime>
-  </ion-item>
+  <div *ngFor="let day of selectedDays">
+    <ion-item>
+      <ion-label>{{ day }} - Hora de Inicio</ion-label>
+      <ion-input type="time" [(ngModel)]="startTimes[day]"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ day }} - Hora de Finalización</ion-label>
+      <ion-input type="time" [(ngModel)]="endTimes[day]"></ion-input>
+    </ion-item>
+  </div>
   <ion-item>
     <ion-label position="floating">Color</ion-label>
     <ion-input [(ngModel)]="color" type="color"></ion-input>
   </ion-item>
-  <ion-button expand="full" (click)="addDays()">Añadir Días</ion-button>
   <ion-button expand="full" color="success" (click)="saveSubject()">Guardar Asignatura</ion-button>
 </ion-content>
