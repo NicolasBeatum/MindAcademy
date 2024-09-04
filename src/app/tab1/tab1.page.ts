@@ -16,11 +16,16 @@ export class Tab1Page implements OnInit {
   }
 
   getSubjectsByDay(day: string): Subject[] {
-    return this.subjects.filter(subject => 
-      subject.days.some(d => d.day === day)
-    ).map(subject => ({
-      ...subject,
-      days: subject.days.filter(d => d.day === day)
-    }));
+    return this.subjects
+      .filter(subject => subject.days.some(d => d.day === day))
+      .map(subject => ({
+        ...subject,
+        days: subject.days.filter(d => d.day === day)
+      }))
+      .sort((a, b) => {
+        const timeA = a.days[0].startTime;
+        const timeB = b.days[0].startTime;
+        return timeA.localeCompare(timeB);
+      });
   }
 }
