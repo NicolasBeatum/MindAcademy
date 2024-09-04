@@ -39,4 +39,8 @@ export class SubjectService {
       this.subjects = JSON.parse(subjects);
     }
   }
+  
+  getSubjectByName(subjectName: string): Subject | undefined {
+    return this.subjects.find(subject => subject.name === subjectName);
+  }
 }

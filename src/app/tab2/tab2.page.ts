@@ -24,4 +24,7 @@ export class Tab2Page implements OnInit {
   navigateToAddSubject() {
     this.router.navigate(['/add-subject']);
   }
+  navigateToEditSubject(subjectName: string) {
+    this.router.navigate(['/add-subject', { name: subjectName }]);
+  }
 }
