@@ -1,17 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Horario de Clases
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let day of ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ day }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let subject of getSubjectsByDay(day)">
+                <ion-label>
+                  {{ subject.name }}<br>
+                  <span *ngFor="let d of subject.days" [ngStyle]="{'background-color': d.color}">
+                    {{ d.startTime }} - {{ d.endTime }}
+                  </span>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
