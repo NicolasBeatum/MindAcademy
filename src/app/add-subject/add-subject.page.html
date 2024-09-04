@@ -22,11 +22,11 @@
   </ion-item>
   <ion-item *ngFor="let day of selectedDays">
     <ion-label>{{ day }} - Hora de Inicio</ion-label>
-    <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="startTimes[day]"></ion-datetime>
+    <ion-datetime display-format="HH:mm" picker-format="HH:mm" presentation="time" [(ngModel)]="startTimes[day]"></ion-datetime>
   </ion-item>
   <ion-item *ngFor="let day of selectedDays">
     <ion-label>{{ day }} - Hora de Finalización</ion-label>
-    <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="endTimes[day]"></ion-datetime>
+    <ion-datetime display-format="HH:mm" picker-format="HH:mm" presentation="time" [(ngModel)]="endTimes[day]"></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Color</ion-label>
