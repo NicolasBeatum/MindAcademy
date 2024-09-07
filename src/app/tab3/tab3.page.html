@@ -1,24 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Calificaciones
+      Asignaturas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Calificaciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content>
   <ion-list>
-    <ion-item *ngFor="let subject of subjects" (click)="openGrades(subject)">
-      <ion-label>
-        <h2>{{ subject.name }}</h2>
-        <p>{{ subject.description }}</p>
-      </ion-label>
-    </ion-item>
+    <ion-item-group *ngFor="let subject of subjects">
+      <ion-item-divider>
+        <ion-label>{{ subject.name }}</ion-label>
+        <ion-button slot="end" (click)="toggleGrades(subject)">
+          <ion-icon slot="icon-only" [name]="subject.showGrades ? 'chevron-up' : 'chevron-down'"></ion-icon>
+        </ion-button>
+      </ion-item-divider>
+      <ion-item *ngIf="subject.showGrades" lines="none">
+        <ion-label>
+          <ion-list>
+            <ion-item *ngFor="let grade of subject.grades; let i = index">
+              <ion-label>
+                {{ grade.name }}: {{ grade.score }}
+              </ion-label>
+              <ion-button slot="end" color="danger" (click)="removeGrade(subject.name, i)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="newGradeName" placeholder="Calificación "></ion-input>
+              <ion-input [(ngModel)]="newGradeScore" placeholder="Puntuación"></ion-input>
+              <ion-button (click)="addGradeToSubject(subject)">Agregar</ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
   </ion-list>
 </ion-content>

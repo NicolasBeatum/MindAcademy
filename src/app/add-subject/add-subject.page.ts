@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-subject.page.scss']
 })
 export class AddSubjectPage implements OnInit {
-  subject: Subject = { name: '', days: [] };
+  subject: Subject = { name: '', days: [], grades: [] }; // Agregar grades: []
   selectedDays: string[] = [];
   startTimes: { [key: string]: string } = {};
   endTimes: { [key: string]: string } = {};
