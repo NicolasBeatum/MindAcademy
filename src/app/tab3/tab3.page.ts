@@ -14,6 +14,9 @@ export class Tab3Page implements OnInit {
   constructor(private subjectService: SubjectService) {}
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.subjects = this.subjectService.getSubjects().map(subject => ({
       ...subject,
       showGrades: false

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectService, Subject } from '../services/subject.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -9,9 +10,14 @@ import { SubjectService, Subject } from '../services/subject.service';
 export class Tab1Page implements OnInit {
   subjects: Subject[] = [];
 
-  constructor(private subjectService: SubjectService) {}
+  constructor(private subjectService: SubjectService
+    , private router: Router
+  ) {}
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.subjects = this.subjectService.getSubjects();
   }
 
@@ -27,5 +33,9 @@ export class Tab1Page implements OnInit {
         const timeB = b.days[0].startTime;
         return timeA.localeCompare(timeB);
       });
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
   }
 }
