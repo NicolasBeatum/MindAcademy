@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="subjects.length > 0">
     <ion-item-group *ngFor="let subject of subjects">
       <ion-item-divider>
         <ion-label>{{ subject.name }}</ion-label>
@@ -27,7 +27,7 @@
               </ion-button>
             </ion-item>
             <ion-item>
-              <ion-input [(ngModel)]="newGradeName" placeholder="Calificación "></ion-input>
+              <ion-input [(ngModel)]="newGradeName" placeholder="Nombre de la calificación"></ion-input>
               <ion-input [(ngModel)]="newGradeScore" placeholder="Puntuación"></ion-input>
               <ion-button (click)="addGradeToSubject(subject)">Agregar</ion-button>
             </ion-item>
@@ -36,4 +36,8 @@
       </ion-item>
     </ion-item-group>
   </ion-list>
+  <ion-item *ngIf="subjects.length === 0">
+    <ion-label>No hay asignaturas disponibles.</ion-label>
+    <ion-button expand="full" (click)="navigateToTab2()">Por favor agregue asignaturas</ion-button>
+  </ion-item>
 </ion-content>

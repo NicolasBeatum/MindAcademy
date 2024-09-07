@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectService, Subject, Grade } from '../services/subject.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -11,9 +12,13 @@ export class Tab3Page implements OnInit {
   newGradeName: string = '';
   newGradeScore: string = '';
 
-  constructor(private subjectService: SubjectService) {}
+  constructor(private subjectService: SubjectService, private router: Router) {}
 
   ngOnInit() {
+    this.subjects = this.subjectService.getSubjects().map(subject => ({
+      ...subject,
+      showGrades: false
+    }));
   }
 
   ionViewWillEnter() {
@@ -55,5 +60,9 @@ export class Tab3Page implements OnInit {
       ...subject,
       showGrades: subject.showGrades || false
     }));
+  }
+
+  navigateToTab2() {
+    this.router.navigate(['/tabs/tab2']);
   }
 }

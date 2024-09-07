@@ -15,11 +15,13 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter() {
     this.subjects = this.subjectService.getSubjects();
   }
+
+  IonViewWillEnter() {
+    this.subjects = this.subjectService.getSubjects();
+  }
+
 
   getSubjectsByDay(day: string): Subject[] {
     return this.subjects
