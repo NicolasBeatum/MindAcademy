@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Chat IA</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Chat IA</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list id="chat-messages">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="assets/avatar-ia.png" alt="IA Avatar">
+        </ion-avatar>
+        <ion-label>
+          <h2>IA</h2>
+          <p>Hola, ¿en qué puedo ayudarte hoy? Estoy aquí para apoyarte con tus tareas universitarias o tu bienestar mental.</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-content>
+
+<ion-footer class="footer">
+  <ion-toolbar>
+    <ion-item>
+      <ion-input id="message-input" placeholder="Escribe un mensaje..."></ion-input>
+      <ion-button id="send-button" fill="solid">Enviar</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

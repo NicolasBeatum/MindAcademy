@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'add-subject',
     loadChildren: () => import('./add-subject/add-subject.module').then( m => m.AddSubjectPageModule)
+  },  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   }
+
 
 ];
 @NgModule({
