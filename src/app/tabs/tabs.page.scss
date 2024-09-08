@@ -1,1 +1,23 @@
-
+.custom-tabs {
+    --background: #f8f9fa;
+  }
+  
+  .custom-tab-bar {
+    --background: #343a40;
+    --color-selected: #ffffff;
+    --color: #adb5bd;
+  }
+  
+  .custom-tab-button {
+    --color-selected: #ffffff;
+    --color: #adb5bd;
+  }
+  
+  .custom-icon {
+    font-size: 24px;
+  }
+  
+  .custom-label {
+    font-size: 14px;
+    font-weight: bold;
+  }
