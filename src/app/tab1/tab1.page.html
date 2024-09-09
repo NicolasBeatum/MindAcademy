@@ -24,7 +24,7 @@
               <ion-item *ngFor="let subject of getSubjectsByDay(day)">
                 <ion-label>
                   {{ subject.name }}<br>
-                  <span *ngFor="let d of subject.days" [ngStyle]="{'background-color': d.color}">
+                  <span *ngFor="let d of subject.days" [ngStyle]="{'background-color': d.color}"class="schedule-time">
                     {{ d.startTime }} - {{ d.endTime }}
                   </span>
                 </ion-label>

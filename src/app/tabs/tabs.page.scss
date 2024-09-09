@@ -1,23 +1,37 @@
 .custom-tabs {
-    --background: #f8f9fa;
-  }
-  
+  --background: #f8f9fa; /* Color de fondo claro */
+}
+
+.custom-tab-bar {
+  --background: #ffffff; /* Fondo blanco para modo claro */
+  --color-selected: #343a40; /* Color oscuro para el ítem seleccionado */
+  --color: #6c757d; /* Color gris para los ítems no seleccionados */
+}
+
+.custom-tab-button {
+  --color-selected: #343a40; /* Color oscuro para el ítem seleccionado */
+  --color: #6c757d; /* Color gris para los ítems no seleccionados */
+}
+
+.custom-icon {
+  font-size: 24px;
+}
+
+.custom-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Aplicar los colores oscuros para modo oscuro */
+@media (prefers-color-scheme: dark) {
   .custom-tab-bar {
-    --background: #343a40;
-    --color-selected: #ffffff;
-    --color: #adb5bd;
+    --background: #343a40; /* Fondo oscuro para modo oscuro */
+    --color-selected: #ffffff; /* Color blanco para el ítem seleccionado */
+    --color: #adb5bd; /* Color gris claro para los ítems no seleccionados */
   }
-  
+
   .custom-tab-button {
-    --color-selected: #ffffff;
-    --color: #adb5bd;
+    --color-selected: #ffffff; /* Color blanco para el ítem seleccionado */
+    --color: #adb5bd; /* Color gris claro para los ítems no seleccionados */
   }
-  
-  .custom-icon {
-    font-size: 24px;
-  }
-  
-  .custom-label {
-    font-size: 14px;
-    font-weight: bold;
-  }
+}

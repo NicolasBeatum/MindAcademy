@@ -34,4 +34,46 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+
+@import 'theme/variables';
+// Aplicar los colores para modo claro
+:root {
+  --ion-background-color: #fff3e0; /* Naranja muy claro */
+  --ion-text-color: #4e342e; /* Marrón oscuro */
+  --ion-tab-bar-background: #fff3e0; /* Naranja muy claro */
+  --ion-tab-bar-color: #4e342e; /* Marrón oscuro */
+  --ion-tab-bar-color-selected: #ff7043; /* Naranja medio */
+  --ion-toolbar-background: #fff3e0; /* Naranja muy claro */
+  --ion-toolbar-color: #4e342e; /* Marrón oscuro */
+  }
+  
+  // Aplicar los colores para modo oscuro
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ion-background-color: #121212; /* Negro */
+      --ion-text-color: #e0e0e0; /* Gris claro */
+      --ion-tab-bar-background: #1f1f1f; /* Gris oscuro */
+      --ion-tab-bar-color: #e0e0e0; /* Gris claro */
+      --ion-tab-bar-color-selected: #b0b0b0; /* Gris medio */
+      --ion-toolbar-background: #1f1f1f; /* Gris oscuro */
+      --ion-toolbar-color: #e0e0e0; /* Gris claro */
+    }
+  }
+  
+// Aplicar las variables CSS a la barra de tabs
+ion-tab-bar {
+    --background: var(--ion-tab-bar-background);
+    --color: var(--ion-tab-bar-color);
+    --color-selected: var(--ion-tab-bar-color-selected);
+  }
+  
+  // Aplicar las variables CSS a la barra de herramientas
+  ion-toolbar {
+    --background: var(--ion-toolbar-background);
+    --color: var(--ion-toolbar-color);
+  }
+  
+  // Aplicar las variables CSS a los elementos de texto
+  .text-element {
+    color: var(--ion-text-color);
+  }
