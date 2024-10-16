@@ -27,6 +27,21 @@ export class Tab1Page implements OnInit {
   ionViewWillEnter() {
     this.subjects = this.subjectService.getSubjects();
   }
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+  }
+
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave');
+  }
+
+  ionViewDidLeave() {
+    console.log('ionViewDidLeave');
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy');
+  }
 
   getSubjectsByDay(day: string): Subject[] {
     return this.subjects
