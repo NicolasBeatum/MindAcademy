@@ -83,6 +83,15 @@ export class NotesPage implements OnInit {
     }
   }
 
+  async deleteImage() {
+    if (this.selectedNote) {
+      await Storage.remove({
+        key: `note-image-${this.selectedNote.title}`
+      });
+      this.capturedImage = null;
+    }
+  }
+
   saveNote() {
     if (this.selectedNote) {
       if (this.selectedNote.title && this.selectedNote.content) {

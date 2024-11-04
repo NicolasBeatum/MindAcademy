@@ -48,6 +48,7 @@
     </ion-item>
     <ion-item *ngIf="capturedImage">
       <img [src]="capturedImage" alt="Imagen capturada" />
+      <ion-button *ngIf="isEditing" color="danger" (click)="deleteImage()">Eliminar Imagen</ion-button>
     </ion-item>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!selectedNote">
