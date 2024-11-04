@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { ChatPage } from './chat.page';
+import { AuthGuard } from '../guad/auth.guard'; // Importar el guard
 
 const routes: Routes = [
   {
     path: '',
-    component: ChatPage
+    component: ChatPage,
+    canActivate: [AuthGuard] // Aplicar el guard a la ruta del chat
   }
 ];
 

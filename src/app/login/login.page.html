@@ -1,34 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title>{{ isRegistering ? 'Registrarse' : 'Iniciar Sesión' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-
-
-  <ion-item *ngIf="!isLoggedIn">
-    <ion-label position="floating">Nombre de Usuario</ion-label>
-    <ion-input [(ngModel)]="username"></ion-input>
-  </ion-item>
-  <ion-item *ngIf="!isLoggedIn">
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
-  <ion-button expand="full" color="primary" (click)="login()" *ngIf="!isLoggedIn">Iniciar Sesión</ion-button>
-  
-  <div class="icon-container" *ngIf="isLoggedIn">
-    <ion-avatar (click)="changeIcon()">
-      <img [src]="userIcon" alt="User Icon">
-    </ion-avatar>
-    <ion-button expand="full" color="primary" (click)="changeIcon()">
-      Cambiar Icono
+  <div *ngIf="!isLoggedIn">
+    <ion-item *ngIf="isRegistering">
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input [(ngModel)]="registerUsername"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isRegistering">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="registerPassword" type="password"></ion-input>
+    </ion-item>
+    <ion-button expand="full" color="primary" (click)="register()" *ngIf="isRegistering">Registrarse</ion-button>
+    
+    <ion-item *ngIf="!isRegistering">
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!isRegistering">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+    <ion-button expand="full" color="primary" (click)="login()" *ngIf="!isRegistering">Iniciar Sesión</ion-button>
+    
+    <ion-button expand="full" color="secondary" (click)="toggleRegister()">
+      {{ isRegistering ? 'Ya tengo una cuenta' : 'Crear una cuenta' }}
     </ion-button>
   </div>
   
-  <ion-item *ngIf="isLoggedIn">
-    <ion-label>Bienvenido, {{ username }}</ion-label>
-  </ion-item>
-  
-  
-  <ion-button expand="full" color="danger" (click)="logout()" *ngIf="isLoggedIn">Cerrar Sesión</ion-button>
+  <div *ngIf="isLoggedIn">
+    <h2>Hola, {{ username }}</h2>
+    <ion-button expand="full" color="danger" (click)="logout()">
+      Cerrar Sesión
+    </ion-button>
+  </div>
 </ion-content>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectService, Subject } from '../services/subject.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Storage } from '@capacitor/storage';
+import { SubjectService, Subject } from '../services/subject.service';
 
 @Component({
   selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  templateUrl: './tab1.page.html',
+  styleUrls: ['./tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
   subjects: Subject[] = [];
@@ -17,16 +18,18 @@ export class Tab1Page implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.subjects = this.subjectService.getSubjects();
     this.route.queryParams.subscribe(params => {
       this.userName = params['username'] || localStorage.getItem('username') || '';
     });
+    await this.loadUserName();
   }
 
   ionViewWillEnter() {
     this.subjects = this.subjectService.getSubjects();
   }
+
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
   }
@@ -35,12 +38,16 @@ export class Tab1Page implements OnInit {
     console.log('ionViewWillLeave');
   }
 
-  ionViewDidLeave() {
-    console.log('ionViewDidLeave');
+  async loadUserName() {
+    const { value } = await Storage.get({ key: 'loggedInUser' });
+    if (value) {
+      const user = JSON.parse(value);
+      this.userName = user.username;
+    }
   }
 
-  ngOnDestroy() {
-    console.log('ngOnDestroy');
+  navigateToLogin() {
+    this.router.navigate(['/login']);
   }
 
   getSubjectsByDay(day: string): Subject[] {
@@ -55,14 +62,5 @@ export class Tab1Page implements OnInit {
         const timeB = b.days[0].startTime;
         return timeA.localeCompare(timeB);
       });
-  }
-
-  saveChanges(day: string) {
-    // Aquí puedes agregar la lógica para guardar los cambios realizados en los horarios de las clases
-    console.log(`Cambios guardados para el día ${day}`);
-  }
-
-  navigateToLogin() {
-    this.router.navigate(['/login']);
   }
 }

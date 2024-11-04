@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AlertController } from '@ionic/angular';
+import { Storage } from '@capacitor/storage';
 
 @Component({
   selector: 'app-login',
@@ -8,61 +9,88 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   username: string = '';
+  password: string = '';
+  registerUsername: string = '';
+  registerPassword: string = '';
   isLoggedIn: boolean = false;
-  userIcon: string = 'https://w7.pngwing.com/pngs/981/645/png-transparent-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-symbol.png';
+  isRegistering: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private alertController: AlertController) {}
 
-  ngOnInit() {
-    const storedUsername = localStorage.getItem('username');
-    const storedIcon = localStorage.getItem('userIcon');
+  async ngOnInit() {
+    await this.checkLoginStatus();
+  }
 
-    if (storedUsername) {
-      this.username = storedUsername;
+  async checkLoginStatus() {
+    const { value } = await Storage.get({ key: 'loggedInUser' });
+    if (value) {
+      const user = JSON.parse(value);
+      this.username = user.username;
       this.isLoggedIn = true;
-    }
-    if (storedIcon) {
-      this.userIcon = storedIcon;
     }
   }
 
-  login() {
-    if (this.username) {
+  async login() {
+    const { value } = await Storage.get({ key: `user-${this.username}` });
+    const user = value ? JSON.parse(value) : null;
+
+    if (user && user.password === this.password) {
       this.isLoggedIn = true;
-      localStorage.setItem('username', this.username);
-      localStorage.removeItem('chatMessages');
-      this.router.navigate(['/tabs/tab1'], { queryParams: { username: this.username } });
+      await Storage.set({
+        key: 'loggedInUser',
+        value: JSON.stringify(user)
+      });
+      await Storage.set({
+        key: 'isLoggedInFlag',
+        value: 'true'
+      });
+      this.router.navigate(['/tabs/tab1']); // Redirigir a tab1 después de iniciar sesión
+    } else {
+      this.showAlert('Nombre de usuario o contraseña incorrectos');
     }
   }
 
-  
+  async register() {
+    const { value } = await Storage.get({ key: `user-${this.registerUsername}` });
+    if (value) {
+      this.showAlert('El nombre de usuario ya existe');
+      return;
+    }
 
-  logout() {
+    const user = {
+      username: this.registerUsername,
+      password: this.registerPassword
+    };
+
+    await Storage.set({
+      key: `user-${this.registerUsername}`,
+      value: JSON.stringify(user)
+    });
+
+    this.showAlert('Usuario registrado exitosamente');
+    this.isRegistering = false;
+  }
+
+  toggleRegister() {
+    this.isRegistering = !this.isRegistering;
+  }
+
+  async logout() {
+    await Storage.remove({ key: 'loggedInUser' });
+    await Storage.remove({ key: 'isLoggedInFlag' });
     this.isLoggedIn = false;
     this.username = '';
-    this.userIcon = 'assets/default-icon.png';
-    localStorage.removeItem('username');
-    localStorage.removeItem('userIcon');
+    this.password = '';
+    this.router.navigate(['/login']); // Redirigir al login después de cerrar sesión
   }
 
-  async changeIcon() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Prompt,
-      });
-
-      this.userIcon = image.webPath || this.userIcon;
-
-      if (image.webPath) {
-        localStorage.setItem('userIcon', image.webPath);
-      }
-    } catch (error) {
-      console.error('Error al cambiar el icono:', error);
-    }
+  async showAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Mensaje',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
