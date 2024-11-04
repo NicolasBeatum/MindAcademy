@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-card *ngFor="let subject of subjects" [ngStyle]="{'background-color': subject.days[0]?.color || '#ffffff'}">
+    <ion-card *ngFor="let subject of subjects" [ngStyle]="{'background-color': subject.days[0].color || '#ffffff'}">
       <ion-card-header>
         <ion-card-title>{{ subject.name }}</ion-card-title>
       </ion-card-header>
@@ -17,6 +17,9 @@
         </ion-button>
         <ion-button slot="end" color="primary" (click)="navigateToEditSubject(subject.name)">
           <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" color="secondary" (click)="navigateToNotes(subject.name)">
+          <ion-icon slot="icon-only" name="book"></ion-icon>
         </ion-button>
       </ion-card-content>
     </ion-card>

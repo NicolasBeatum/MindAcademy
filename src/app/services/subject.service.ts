@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 
+export interface Note {
+  title: string;
+  content: string;
+}
+
 export interface Grade {
   name: string;
   score: string;
@@ -9,7 +14,8 @@ export interface Subject {
   name: string;
   days: { day: string, startTime: string, endTime: string, color: string }[];
   grades: Grade[];
-  showGrades?: boolean; // Agregar esta línea
+  notes?: Note[];
+  showGrades?: boolean;
 }
 
 @Injectable({
@@ -36,6 +42,14 @@ export class SubjectService {
     this.saveSubjects();
   }
 
+  updateSubject(subject: Subject): void {
+    const index = this.subjects.findIndex(s => s.name === subject.name);
+    if (index !== -1) {
+      this.subjects[index] = subject;
+      this.saveSubjects();
+    }
+  }
+
   addGrade(subjectName: string, grade: Grade): void {
     const subject = this.getSubjectByName(subjectName);
     if (subject) {
@@ -44,10 +58,19 @@ export class SubjectService {
     }
   }
 
-  deleteGrade(subjectName: string, gradeName: string): void {
+  removeGrade(subjectName: string, gradeIndex: number): void {
     const subject = this.getSubjectByName(subjectName);
     if (subject) {
-      subject.grades = subject.grades.filter(grade => grade.name !== gradeName);
+      subject.grades.splice(gradeIndex, 1);
+      this.saveSubjects();
+    }
+  }
+
+  addNoteToSubject(subjectName: string, note: Note): void {
+    const subject = this.getSubjectByName(subjectName);
+    if (subject) {
+      subject.notes = subject.notes || [];
+      subject.notes.push(note);
       this.saveSubjects();
     }
   }
@@ -65,12 +88,5 @@ export class SubjectService {
 
   getSubjectByName(subjectName: string): Subject | undefined {
     return this.subjects.find(subject => subject.name === subjectName);
-  }
-
-  removeGrade(subjectName: string, gradeIndex: number) {
-    const subject = this.subjects.find(sub => sub.name === subjectName);
-    if (subject) {
-      subject.grades.splice(gradeIndex, 1);
-    }
   }
 }

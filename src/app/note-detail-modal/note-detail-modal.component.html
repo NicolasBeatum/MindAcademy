@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ note ? 'Editar Apunte' : 'Nuevo Apunte' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveNote()">
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" *ngIf="note" (click)="deleteNote()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+      <ion-button color="light" (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-input [(ngModel)]="noteTitle" placeholder="Título del apunte"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-textarea [(ngModel)]="noteContent" placeholder="Contenido del apunte"></ion-textarea>
+  </ion-item>
+</ion-content>

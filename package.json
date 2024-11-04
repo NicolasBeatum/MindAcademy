@@ -26,6 +26,7 @@
     "@capacitor/filesystem": "^6.0.1",
     "@google/generative-ai": "^0.21.0",
     "@ionic/angular": "^8.0.0",
+    "@ionic/pwa-elements": "^3.3.0",
     "capacitor-fingerprint-auth": "^0.0.2",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",

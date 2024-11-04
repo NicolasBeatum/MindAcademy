@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Apuntes</ion-title>
+    <ion-buttons slot="end" *ngIf="selectedNote">
+      <ion-button *ngIf="!isEditing" (click)="enableEditing()">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isEditing" (click)="saveNote()">
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isEditing" color="danger" (click)="deleteNote()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+      <ion-button color="light" (click)="closeNoteDetail()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="!selectedNote">
+    <ion-item *ngFor="let note of notes" (click)="openNoteDetail(note)">
+      <ion-label>
+        <h2>{{ note.title }}</h2>
+        <p>{{ note.content | slice:0:50 }}...</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="selectedNote" class="note-detail">
+    <ion-item *ngIf="!isEditing">
+      <ion-label>
+        <h2><strong>{{ selectedNote.title }}</strong></h2>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="!isEditing">
+      <ion-label>
+        <p>{{ selectedNote.content }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="isEditing">
+      <ion-input [(ngModel)]="selectedNote.title" placeholder="Título del apunte"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isEditing">
+      <ion-textarea [(ngModel)]="selectedNote.content" placeholder="Contenido del apunte"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="isEditing">
+      <ion-button (click)="captureImage()">Agregar Imagen</ion-button>
+    </ion-item>
+    <ion-item *ngIf="capturedImage">
+      <img [src]="capturedImage" alt="Imagen capturada" />
+    </ion-item>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!selectedNote">
+    <ion-fab-button (click)="openNewNoteModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
