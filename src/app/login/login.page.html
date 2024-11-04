@@ -4,6 +4,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+
+
   <ion-item *ngIf="!isLoggedIn">
     <ion-label position="floating">Nombre de Usuario</ion-label>
     <ion-input [(ngModel)]="username"></ion-input>
@@ -14,8 +16,19 @@
   </ion-item>
   <ion-button expand="full" color="primary" (click)="login()" *ngIf="!isLoggedIn">Iniciar Sesión</ion-button>
   
+  <div class="icon-container" *ngIf="isLoggedIn">
+    <ion-avatar (click)="changeIcon()">
+      <img [src]="userIcon" alt="User Icon">
+    </ion-avatar>
+    <ion-button expand="full" color="primary" (click)="changeIcon()">
+      Cambiar Icono
+    </ion-button>
+  </div>
+  
   <ion-item *ngIf="isLoggedIn">
     <ion-label>Bienvenido, {{ username }}</ion-label>
   </ion-item>
+  
+  
   <ion-button expand="full" color="danger" (click)="logout()" *ngIf="isLoggedIn">Cerrar Sesión</ion-button>
 </ion-content>
