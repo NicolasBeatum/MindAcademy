@@ -7,20 +7,22 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-card *ngFor="let subject of subjects" [ngStyle]="{'background-color': subject.days[0].color || '#ffffff'}">
+    <ion-card *ngFor="let subject of subjects" [ngStyle]="{'background-color': subject.days[0].color || '#ffffff'}" style="margin-bottom: 16px;">
       <ion-card-header>
         <ion-card-title>{{ subject.name }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-button slot="end" color="danger" (click)="deleteSubject(subject.name)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-        <ion-button slot="end" color="primary" (click)="navigateToEditSubject(subject.name)">
-          <ion-icon slot="icon-only" name="create"></ion-icon>
-        </ion-button>
-        <ion-button slot="end" color="secondary" (click)="navigateToNotes(subject.name)">
-          <ion-icon slot="icon-only" name="book"></ion-icon>
-        </ion-button>
+        <div style="display: flex; justify-content: flex-end; gap: 8px;">
+          <ion-button color="danger" (click)="deleteSubject(subject.name)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+          <ion-button color="primary" (click)="navigateToEditSubject(subject.name)">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-button>
+          <ion-button color="secondary" (click)="navigateToNotes(subject.name)">
+            <ion-icon slot="icon-only" name="book"></ion-icon>
+          </ion-button>
+        </div>
       </ion-card-content>
     </ion-card>
   </ion-list>

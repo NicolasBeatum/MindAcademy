@@ -1,6 +1,70 @@
-ion-card-title {
-    color: var(--ion-text-color);
-  }
-  .schedule-time {
-    color: black !important; /* Color negro para los horarios */
-  }
+/* Alinear título a la izquierda */
+.left-aligned-title {
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+/* Estilo de las tarjetas del horario */
+.day-card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.day-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo del encabezado de cada tarjeta */
+.day-card-header {
+  background-color: #000000;
+  border-radius: 12px 12px 0 0;
+  text-align: center;
+}
+
+/* Estilo del título de cada día */
+.day-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Lista de asignaturas */
+.subject-item {
+  margin-bottom: 10px;
+  border-left: 4px solid #3b82f6;
+  padding-left: 10px;
+}
+
+/* Nombre de la asignatura */
+.subject-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Estilo para las horas */
+.schedule-time {
+  display: inline-block;
+  font-size: 0.85rem;
+  margin: 5px 0;
+  padding: 3px 8px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Tarjetas responsivas */
+.schedule-grid {
+  margin-top: 20px;
+}
+
+.greeting-message {
+  margin-left: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+}

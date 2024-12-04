@@ -1,30 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="left-aligned-title">
       Horario de Clases
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="navigateToLogin()">
         <ion-icon slot="icon-only" name="person-circle"></ion-icon>
       </ion-button>
-      <span *ngIf="userName" class="greeting-message">Hola, {{ userName }}!</span>
+      <span *ngIf="userName" class="greeting-message">
+        Hola, {{ userName }}!
+      </span>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content [fullscreen]="true">
-  <ion-grid>
+  <ion-grid class="schedule-grid">
     <ion-row>
-      <ion-col *ngFor="let day of ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ day }}</ion-card-title>
+      <ion-col
+        size="12"
+        size-md="6"
+        size-lg="4"
+        *ngFor="let day of ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']"
+      >
+        <ion-card class="day-card">
+          <ion-card-header class="day-card-header">
+            <ion-card-title class="day-title">{{ day }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-list>
-              <ion-item *ngFor="let subject of getSubjectsByDay(day)">
+            <ion-list lines="none">
+              <ion-item
+                *ngFor="let subject of getSubjectsByDay(day)"
+                class="subject-item"
+              >
                 <ion-label>
-                  {{ subject.name }}<br>
-                  <span *ngFor="let d of subject.days" [ngStyle]="{'background-color': d.color}" class="schedule-time">
+                  <strong class="subject-name">{{ subject.name }}</strong>
+                  <br />
+                  <span
+                    *ngFor="let d of subject.days"
+                    [ngStyle]="{ 'background-color': d.color }"
+                    class="schedule-time badge"
+                  >
                     {{ d.startTime }} - {{ d.endTime }}
                   </span>
                 </ion-label>

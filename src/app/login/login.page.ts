@@ -93,4 +93,13 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+  loggedInMessageColor: string = '#10b981'; // Color predeterminado
+
+// Ejemplo para cambiar dinámicamente el color
+changeLoggedInMessageColor(color: string) {
+  this.loggedInMessageColor = color;
+}
+goBack() {
+  this.router.navigate(['/tabs/tab1']); // Cambia '/tabs/tab1' según la ruta de tu tab1
+}
 }

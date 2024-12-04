@@ -1,18 +1,98 @@
-.icon-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  ion-avatar {
-    width: 100px;
-    height: 100px; 
-  }
+/* Variables para personalizar colores */
+:root {
+  --header-title-color: #3b82f6;
+  --welcome-message-color: #10b981;
+  --custom-button-background: #3b82f6;
+  --custom-button-background-hover: #2563eb;
+  --custom-button-secondary: #6b7280;
+  --custom-button-secondary-hover: #4b5563;
+}
 
-  .welcome-message {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+/* Encabezado */
+.header-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--header-title-color);
+}
+
+/* Botón de retroceso */
+ion-button[slot="start"] {
+  --background: transparent;
+  --color: var(--header-title-color);
+  animation: fadeIn 0.5s ease-out;
+  transition: transform 0.3s ease;
+}
+
+ion-button[slot="start"]:hover {
+  transform: scale(1.1); /* Agrandar el botón ligeramente al pasar el ratón */
+}
+
+/* Contenedor del formulario */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  padding: 16px;
+  gap: 16px;
+}
+
+/* Botones personalizados */
+.custom-button {
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  height: 50px;
+  --background: var(--custom-button-background);
+  --background-hover: var(--custom-button-background-hover);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-button:hover {
+  transform: scale(1.03);
+}
+
+.secondary-button {
+  --background: var(--custom-button-secondary);
+  --background-hover: var(--custom-button-secondary-hover);
+}
+
+/* Contenedor de sesión iniciada */
+.logged-in-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  gap: 20px;
+}
+
+/* Mensaje de bienvenida */
+.welcome-message {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--welcome-message-color);
+}
+
+/* Botón de cerrar sesión */
+.logout-button {
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  height: 50px;
+}
+
+/* Animación para el botón de retroceso */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

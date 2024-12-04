@@ -11,24 +11,33 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list id="chat-messages">
-    <ion-item *ngFor="let message of messages">
-      <ion-avatar slot="start" *ngIf="message.sender === 'IA'">
-        <img src="https://web.dev/static/articles/building/an-adaptive-favicon/image/example-dark-theme-favico-6a6f6f67bc3e7.png" alt="IA Avatar">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ message.sender }}</h2>
-        <p>{{ message.text }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card class="chat-card">
+    <ion-card-header>
+      <ion-card-title>Chat</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list id="chat-messages">
+        <ion-item *ngFor="let message of messages" [ngClass]="{'ia-message': message.sender === 'IA', 'user-message': message.sender !== 'IA'}">
+          <ion-avatar slot="start" *ngIf="message.sender === 'IA'">
+            <img src="https://web.dev/static/articles/building/an-adaptive-favicon/image/example-dark-theme-favico-6a6f6f67bc3e7.png" alt="IA Avatar">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ message.sender }}</h2>
+            <p>{{ message.text }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer class="footer">
   <ion-toolbar>
     <ion-item>
-      <ion-input id="message-input" placeholder="Escribe un mensaje..." [(ngModel)]="newMessage"></ion-input>
-      <ion-button id="send-button" fill="solid" (click)="sendMessage()">Enviar</ion-button>
+      <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje..."></ion-input>
+      <ion-button (click)="sendMessage()" slot="end">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-toolbar>
 </ion-footer>
