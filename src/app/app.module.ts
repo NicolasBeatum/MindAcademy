@@ -5,6 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @NgModule({
   declarations: [
