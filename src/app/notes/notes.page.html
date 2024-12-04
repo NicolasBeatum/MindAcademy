@@ -34,7 +34,7 @@
     </ion-item>
     <ion-item *ngIf="!isEditing">
       <ion-label>
-        <p>{{ selectedNote.content }}</p>
+        <markdown [data]="selectedNote.content"></markdown>
       </ion-label>
     </ion-item>
     <ion-item *ngIf="isEditing">

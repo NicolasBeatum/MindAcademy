@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { NotesPage } from './notes.page';
 import { NoteDetailModalComponent } from '../note-detail-modal/note-detail-modal.component'; // Asegúrate de que la ruta sea correcta
 import { RouterModule, Routes } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
+
 
 const routes: Routes = [
   {
@@ -18,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    MarkdownModule.forRoot(),
     RouterModule.forChild(routes)
   ],
   declarations: [NotesPage, NoteDetailModalComponent]
