@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    MarkdownModule.forRoot(),
     FormsModule // Añadir FormsModule a la lista de imports
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

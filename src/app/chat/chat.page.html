@@ -23,7 +23,7 @@
           </ion-avatar>
           <ion-label>
             <h2>{{ message.sender }}</h2>
-            <p>{{ message.text }}</p>
+            <markdown class="selectable" [data]="message.text"></markdown>
           </ion-label>
         </ion-item>
       </ion-list>
